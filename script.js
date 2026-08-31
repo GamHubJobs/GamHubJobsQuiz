@@ -192,6 +192,7 @@
     let currentQuestionIndex = 0;
     let timerInterval, countdownInterval;
     let optionsClickable = true;
+    let answerSoundPlayed = false; // ensures the ding/error only ever fires once per question
 
     const questionElement = document.getElementById('question');
     const optionsContainer = document.getElementById('options');
@@ -200,7 +201,10 @@
     const questionNumberElement = document.getElementById('question-number');
     const questionContainerElement = document.getElementById('question-container');
     const questionImageElement = document.getElementById('question-image');
-    const beepSound = document.getElementById('beep-sound');
+    const sound = window.quizzySound || {
+      // No-op fallback so the quiz still runs fine if audio.js failed to load.
+      playSwoosh(){}, playTick(){}, playDing(){}, playError(){}
+    };
 
     function loadQuestion() {
       if (currentQuestionIndex >= questions.length) {
@@ -220,6 +224,7 @@
     }
 
     function renderQuestion() {
+      answerSoundPlayed = false;
       questionNumberElement.textContent = `Question: ${currentQuestionIndex + 1}/${questions.length}`;
       questionContainerElement.classList.add('enter');
 
@@ -273,14 +278,12 @@
         let secondsLeft = 10;
         countdownElement.textContent = secondsLeft;
         countdownElement.classList.remove('hidden');
+        sound.playTick(); // tick for the initial "10" the moment the countdown starts
 
         countdownInterval = setInterval(() => {
           secondsLeft--;
           countdownElement.textContent = secondsLeft;
-          if (beepSound && beepSound.src) {
-            beepSound.currentTime = 0;
-            beepSound.play().catch(() => {});
-          }
+          if (secondsLeft > 0) sound.playTick();
           if (secondsLeft <= 3) timerElement.classList.add('ending');
           if (secondsLeft <= 0) clearInterval(countdownInterval);
         }, 1000);
@@ -291,6 +294,10 @@
             clearInterval(countdownInterval);
             const options = document.querySelectorAll('.option');
             options[questions[currentQuestionIndex].correctIndex].classList.add('correct');
+            if (!answerSoundPlayed) {
+              answerSoundPlayed = true;
+              sound.playDing();
+            }
             setTimeout(transitionToNextQuestion, 1500);
           }
         }, 10000);
@@ -307,15 +314,24 @@
 
       if (selectedIndex === currentQuestion.correctIndex) {
         options[selectedIndex].classList.add('correct');
+        if (!answerSoundPlayed) {
+          answerSoundPlayed = true;
+          sound.playDing();
+        }
       } else {
         options[selectedIndex].classList.add('incorrect');
         options[currentQuestion.correctIndex].classList.add('correct');
+        if (!answerSoundPlayed) {
+          answerSoundPlayed = true;
+          sound.playError();
+        }
       }
 
       setTimeout(transitionToNextQuestion, 1500);
     }
 
     function transitionToNextQuestion() {
+      sound.playSwoosh(); // fires right as the exit animation begins
       questionContainerElement.classList.add('exit');
       setTimeout(() => {
         currentQuestionIndex++;
