@@ -8,6 +8,16 @@
 </head>
 <body>
 
+  <!-- ================= Audio Controls ================= -->
+  <div class="audio-controls" id="audio-controls">
+    <button type="button" class="audio-btn" id="sfx-toggle" aria-label="Toggle sound effects" aria-pressed="true">
+      <span class="audio-icon" aria-hidden="true">🔊</span>
+    </button>
+    <button type="button" class="audio-btn" id="music-toggle" aria-label="Toggle background music" aria-pressed="true">
+      <span class="audio-icon" aria-hidden="true">🎵</span>
+    </button>
+  </div>
+
   <!-- ================= Scene 1: Opening Hook ================= -->
   <div class="scene active" id="scene-intro">
     <div class="flag-container"><canvas id="flag-canvas-intro"></canvas></div>
@@ -53,8 +63,7 @@
     </div>
   </div>
 
-  <audio id="beep-sound" preload="auto"></audio>
-
+  <script src="audio.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
