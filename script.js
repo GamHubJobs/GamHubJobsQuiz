@@ -13,27 +13,27 @@
         options: ["1965", "1960", "1970", "1975"],
         correctIndex: 0,
         readTime: 5000,
-        imageSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Banjul_Arch_22.jpg/220px-Banjul_Arch_22.jpg"
+        imageSrc: "https://i0.wp.com/make-it-plain.org/wp-content/uploads/2023/02/IMG_5954-1.jpg?resize=696%2C467&ssl=1"
       },
       {
         question: "When did The Gambia become a republic?",
         options: ["1965", "1970", "1980", "1994"],
         correctIndex: 1,
-        readTime: 6000,
-        imageSrc: "https://gambiana.com/wp-content/uploads/2020/02/640C453D-93CE-462C-BE9F-1B34AD1C0199.jpeg"
+        readTime: 4000,
+        imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTACfjtM2gSU8h_xC6tGe9PyNM7R9ovcqONAInY35IYXS_VQXtb0FcVhsM&s=10"
       },
       {
         question: "What is the capital city of The Gambia?",
         options: ["Brikama", "Banjul", "Serrekunda", "Bakau"],
-        correctIndex: 1,
-        readTime: 6000,
-        imageSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Banjul_Arch_22.jpg/220px-Banjul_Arch_22.jpg"
+        correctIndex: 0,
+        readTime: 4000,
+        imageSrc: "https://www.accessgambia.com/large/banjul-city-37.jpg"
       },
       {
         question: "Who led the 1981 coup attempt in The Gambia that was eventually defeated?",
         options: ["Kukoi Samba Sanyang", "Yahya Jammeh", "Edward Singhateh", "Lamin Kaba Bajo"],
         correctIndex: 0,
-        readTime: 6000,
+        readTime: 5000,
         imageSrc: "https://thepoint.gm/assets/Featured-Articles/Kukoi-and-others.jpg"
       },
       {
@@ -55,7 +55,7 @@
         options: ["Tobaski", "Wassu", "Kankurang", "Jokadu Festival"],
         correctIndex: 2,
         readTime: 6000,
-        imageSrc: "https://www.fao.org/typo3temp/pics/cd51075ec0.jpg"
+        imageSrc: "https://www.my-gambia.com/wp-content/uploads/Featured-photo-HD-kankurang-festival.jpg"
       },
       {
         question: "Which ethnic group is the smallest among the major groups in The Gambia?",
