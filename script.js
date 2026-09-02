@@ -259,6 +259,20 @@
       });
     }
 
+    // Freezes the timer bar exactly where it visually is right now.
+    // clearTimeout()/clearInterval() only stop the JS-side countdown logic —
+    // they have no effect on the CSS `transition: width 10s linear` that's
+    // actually animating the bar, so without this the bar keeps sliding
+    // toward 0% on its own (out of sync with the now-frozen number) after
+    // an answer is picked. Reading the live computed width and re-applying
+    // it with transitions disabled cancels that in-flight animation in place.
+    function freezeTimerBar() {
+      const currentWidth = getComputedStyle(timerElement).width;
+      timerElement.style.transition = 'none';
+      timerElement.style.width = currentWidth;
+      void timerElement.offsetWidth; // force reflow so the frozen width sticks
+    }
+
     function startTimerWithPause(pauseTime) {
       timerElement.style.transition = 'none';
       timerElement.style.width = '100%';
@@ -308,6 +322,8 @@
       optionsClickable = false;
       clearTimeout(timerInterval);
       clearInterval(countdownInterval);
+      freezeTimerBar();
+      countdownElement.classList.add('hidden');
 
       const currentQuestion = questions[currentQuestionIndex];
       const options = document.querySelectorAll('.option');
